@@ -1,0 +1,21 @@
+name: Check my python & django code quality
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install flake8 black isort
+      - name: Run black formatter
+        run: black --check ./
+      - name: Run isort formatter
+        run: isort --check ./
+      - name: Run linter
+        run: flake8 ./
