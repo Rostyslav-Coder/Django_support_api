@@ -100,8 +100,21 @@ def get_pokemon_for_mobile(request, name: str):
     )
 
 
+def get_all_pokemons(request) -> dict[str, dict]:
+    all_pokemons = {}
+
+    for key, value in POKEMONS.items():
+        all_pokemons[key] = asdict(value)
+
+    return HttpResponse(
+        content_type="application/json",
+        content=json.dumps(all_pokemons)
+    )
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/pokemons/<str:name>/", get_pokemon),
     path("api/pokemons/mobile/<str:name>/", get_pokemon_for_mobile),
+    path("api/pokemons", get_all_pokemons),
 ]
