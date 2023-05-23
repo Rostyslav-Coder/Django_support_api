@@ -121,8 +121,7 @@ def get_all_pokemons(request) -> dict[str, dict]:
             all_pokemons[key] = asdict(value)
 
         return HttpResponse(
-            content_type="application/json",
-            content=json.dumps(all_pokemons)
+            content_type="application/json", content=json.dumps(all_pokemons)
         )
 
 
