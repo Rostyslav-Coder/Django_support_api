@@ -22,9 +22,8 @@ import requests
 from django.conf import settings  # pylint: disable=E0401
 from django.contrib import admin  # pylint: disable=E0401
 # fmt: off
-from django.http import (  # pylint: disable=E0401
-    HttpResponse, HttpResponseNotFound
-    )
+from django.http import (HttpResponse,  # pylint: disable=E0401
+                         HttpResponseNotFound)
 # fmt: on
 from django.urls import path  # pylint: disable=E0401
 
