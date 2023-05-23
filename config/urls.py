@@ -21,7 +21,11 @@ from dataclasses import asdict, dataclass
 import requests
 from django.conf import settings  # pylint: disable=E0401
 from django.contrib import admin  # pylint: disable=E0401
-from django.http import HttpResponse, HttpResponseNotFound  # pylint: disable=E0401
+# fmt: off
+from django.http import (  # pylint: disable=E0401
+    HttpResponse, HttpResponseNotFound
+    )
+# fmt: on
 from django.urls import path  # pylint: disable=E0401
 
 
