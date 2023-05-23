@@ -21,7 +21,11 @@ from dataclasses import asdict, dataclass
 import requests
 from django.conf import settings  # pylint: disable=E0401
 from django.contrib import admin  # pylint: disable=E0401
-from django.http import HttpResponse, HttpResponseNotFound  # pylint: disable=E0401
+# fmt: off
+from django.http import (  # pylint: disable=E0401
+    HttpResponse, HttpResponseNotFound
+    )
+# fmt: on
 from django.urls import path  # pylint: disable=E0401
 
 
@@ -87,30 +91,37 @@ def _del_pokemon(name):
 def get_pokemon(request, name: str):
     if request.method == "GET":
         pokemon: Pokemon = _get_pokemon(name)
-    elif request.method == "DELETE":
-        pokemon: Pokemon = _del_pokemon(name)
 
-    return HttpResponse(
-        content_type="application/json",
-        content=json.dumps(asdict(pokemon)),
-    )
+        return HttpResponse(
+            content_type="application/json",
+            content=json.dumps(asdict(pokemon)),
+        )
+
+    elif request.method == "DELETE":
+        if name in POKEMONS:
+            pokemon: Pokemon = _del_pokemon(name)
+        else:
+            return HttpResponseNotFound("Object not found")
 
 
 def get_pokemon_for_mobile(request, name: str):
     if request.method == "GET":
         pokemon: Pokemon = _get_pokemon(name)
+
+        result = filter_by_keys(
+            asdict(pokemon),
+            ["id", "name", "base_experience"],
+        )
+        return HttpResponse(
+            content_type="application/json",
+            content=json.dumps(result),
+        )
+
     elif request.method == "DELETE":
-        pokemon: Pokemon = _del_pokemon(name)
-
-    result = filter_by_keys(
-        asdict(pokemon),
-        ["id", "name", "base_experience"],
-    )
-
-    return HttpResponse(
-        content_type="application/json",
-        content=json.dumps(result),
-    )
+        if name in POKEMONS:
+            pokemon: Pokemon = _del_pokemon(name)
+        else:
+            return HttpResponseNotFound("Object not found")
 
 
 def get_all_pokemons(request) -> dict[str, dict]:
