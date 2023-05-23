@@ -78,8 +78,17 @@ def _get_pokemon(name) -> Pokemon:
     return pokemon
 
 
+def _del_pokemon(name):
+    """Delete pokemon from the cache"""
+
+    return POKEMONS.pop(name)
+
+
 def get_pokemon(request, name: str):
-    pokemon: Pokemon = _get_pokemon(name)
+    if request.method == "GET":
+        pokemon: Pokemon = _get_pokemon(name)
+    elif request.method == "DELETE":
+        pokemon: Pokemon = _del_pokemon(name)
 
     return HttpResponse(
         content_type="application/json",
@@ -88,7 +97,11 @@ def get_pokemon(request, name: str):
 
 
 def get_pokemon_for_mobile(request, name: str):
-    pokemon: Pokemon = _get_pokemon(name)
+    if request.method == "GET":
+        pokemon: Pokemon = _get_pokemon(name)
+    elif request.method == "DELETE":
+        pokemon: Pokemon = _del_pokemon(name)
+
     result = filter_by_keys(
         asdict(pokemon),
         ["id", "name", "base_experience"],
@@ -101,20 +114,21 @@ def get_pokemon_for_mobile(request, name: str):
 
 
 def get_all_pokemons(request) -> dict[str, dict]:
-    all_pokemons = {}
+    if request.method == "GET":
+        all_pokemons = {}
 
-    for key, value in POKEMONS.items():
-        all_pokemons[key] = asdict(value)
+        for key, value in POKEMONS.items():
+            all_pokemons[key] = asdict(value)
 
-    return HttpResponse(
-        content_type="application/json",
-        content=json.dumps(all_pokemons)
-    )
+        return HttpResponse(
+            content_type="application/json",
+            content=json.dumps(all_pokemons)
+        )
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/pokemons/<str:name>/", get_pokemon),
     path("api/pokemons/mobile/<str:name>/", get_pokemon_for_mobile),
-    path("api/pokemons", get_all_pokemons),
+    path("api/pokemons/", get_all_pokemons),
 ]
