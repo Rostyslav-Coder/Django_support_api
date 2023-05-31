@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "e575e6f1-b8cd-474a-b1fc-263d67ad3c3e",
+		"name": "Test support API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25796701"
+	},
+	"item": [
+		{
+			"name": "GET THE X-CSRF-TOKEN",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/admin/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"admin",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get pokemon ditto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemons/ditto/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemons",
+						"ditto",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get pokemon pikachu",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemons/pikachu/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemons",
+						"pikachu",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get pokemon venusaur",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemons/venusaur/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemons",
+						"venusaur",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get pokemon mobile ditto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemons/mobile/ditto/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemons",
+						"mobile",
+						"ditto",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get pokemon mobile pikachu",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemons/mobile/pikachu/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemons",
+						"mobile",
+						"pikachu",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get pokemon mobile venusaur",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemons/mobile/venusaur/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemons",
+						"mobile",
+						"venusaur",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all pokemons from cache",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemons/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemons",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE pokemon ditto",
+			"protocolProfileBehavior": {
+				"removeRefererHeaderOnRedirect": false
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemons/ditto/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemons",
+						"ditto",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE pokemon pikachu",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemons/pikachu/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemons",
+						"pikachu",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE pokemon venusaur",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemons/venusaur/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemons",
+						"venusaur",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
