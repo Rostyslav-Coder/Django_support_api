@@ -10,3 +10,7 @@ class Users(models.Model):
     last_name = models.CharField(max_length=100)
     password = models.CharField(max_length=255)
     role = models.PositiveSmallIntegerField()
+
+    class Meta:
+        """Meta class to rename users table"""
+        db_table = "users"
