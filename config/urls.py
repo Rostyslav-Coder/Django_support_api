@@ -20,11 +20,11 @@ import json
 from dataclasses import asdict, dataclass
 
 import requests
-from django.conf import settings  # pylint: disable=E0401
-from django.contrib import admin  # pylint: disable=E0401
-from django.http import HttpResponse  # pylint: disable=E0401
-from django.http import HttpResponseNotFound  # pylint: disable=E0401
-from django.urls import path  # pylint: disable=E0401
+from django.conf import settings
+from django.contrib import admin
+from django.http import HttpResponse
+from django.http import HttpResponseNotFound
+from django.urls import path
 
 
 def filter_by_keys(sourse: dict, keys: list[str]) -> dict:
@@ -130,7 +130,8 @@ def get_all_pokemons(request) -> dict[str, dict]:
             all_pokemons[key] = asdict(value)
 
         return HttpResponse(
-            content_type="application/json", content=json.dumps(all_pokemons)
+            content_type="application/json",
+            content=json.dumps(all_pokemons),
         )
 
 
