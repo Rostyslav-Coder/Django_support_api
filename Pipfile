@@ -11,6 +11,7 @@ isort = "*"
 flake8 = "*"
 black = "*"
 requests = "*"
+pylint-django = "*"
 
 [requires]
 python_version = "3.11"
