@@ -16,128 +16,144 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-import json
-from dataclasses import asdict, dataclass
 
-import requests
-from django.conf import settings
+import json
+
+from functools import wraps
 from django.contrib import admin
 from django.http import HttpResponse
-from django.http import HttpResponseNotFound
 from django.urls import path
+from core.models import User
 
 
-def filter_by_keys(sourse: dict, keys: list[str]) -> dict:
-    filtered_data = {}
-
-    for key, value in sourse.items():
-        if key in keys:
-            filtered_data[key] = value
-
-    return filtered_data
-
-
-@dataclass
-class Pokemon:
-    id: int
-    name: str
-    height: int
-    weight: int
-    base_experience: int
-
-    @classmethod
-    def from_raw_data(cls, raw_data: dict) -> "Pokemon":
-        filtered_data = filter_by_keys(
-            raw_data,
-            cls.__dataclass_fields__.keys(),  # pylint: disable=E1101
-        )
-        return cls(**filtered_data)
+# ****************************************************************************
+# All roles are hardcoded instead of being used the database
+# ****************************************************************************
+ROLES = {
+    "ADMIN": 1,
+    "MANAGER": 2,
+    "USER": 3,
+}
 
 
-# CACHE SIMULATOR
-POKEMONS: dict[str, Pokemon] = {}
+def error_handling(func):
+    """Decorator for error handling"""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except User.DoesNotExist:  # pylint: disable=E1101
+            response_data = {"message": "User not found."}
+            return response_data
+    return wrapper
 
 
-def get_pokemon_from_api(name: str) -> Pokemon:
-    url = settings.POKEAPI_BASE_URL + f"/{name}"
-    response = requests.get(url, timeout=5)
-    raw_data = response.json()
+@error_handling
+def _get_user(request):
+    username = request.GET.get("username")
 
-    return Pokemon.from_raw_data(raw_data)
+    user = User.objects.get(username=username)  # pylint: disable=E1101
+    response_data = {
+        "username": user.username,
+        "email": user.email,
+        "firstName": user.first_name,
+        "lastName": user.last_name,
+    }
+
+    return response_data
 
 
-def _get_pokemon(name) -> Pokemon:
-    """Take pokemon from the cache or
-    get it from the API and then save it to thhe cache.
-    """
+def _create_user(request):
+    username = request.POST.get("username")
+    email = request.POST.get("email")
+    first_name = request.POST.get("first_name")
+    last_name = request.POST.get("last_name")
+    password = request.POST.get("password")
 
-    if name in POKEMONS:
-        pokemon = POKEMONS[name]
+    if User.objects.filter(username=username).exists():  # pylint: disable=E1101
+        response_data = {"message": f"User {username} already taken."}
+
+        return response_data
+
+    user = User.objects.create(  # pylint: disable=E1101
+        username=username,
+        email=email,
+        first_name=first_name,
+        last_name=last_name,
+        password=password,
+        role=3
+    )
+
+    response_data = {"message": f"User {user.username} created successfully."}
+
+    return response_data
+
+
+@error_handling
+def _delete_user(request):
+    """This funktion delete users from DB"""
+    data = json.loads(request.body)
+    username = data.get("username")
+
+    user = User.objects.get(username=username)  # pylint: disable=E1101
+    user.delete()
+    response_data = {"message": f"User {username} delete successfully."}
+
+    return response_data
+
+
+@error_handling
+def _update_user(request):
+    data = json.loads(request.body)
+    username = data.get("username")
+    email = data.get("email")
+    first_name = data.get("first_name")
+    last_name = data.get("last_name")
+
+    user = User.objects.get(username=username)  #pylint: disable=E1101
+    if email:
+        user.email = email
+    if first_name:
+        user.first_name = first_name
+    if last_name:
+        user.last_name = last_name
+    user.save()
+    response_data = {"message": f"User {username} updated successfully."}
+
+    return response_data
+
+
+def _invalid_request():
+    response_data = {"message": "Invalid request method."}
+
+    return response_data
+
+
+def user_view(request):
+    """This function returns, creates and deletes users."""
+
+    if request.method == "GET":
+        response = _get_user(request)
+
+    elif request.method == "POST":
+        response = _create_user(request)
+
+    elif request.method == "DELETE":
+        response = _delete_user(request)
+
+    elif request.method == "PUT":
+        response = _update_user(request)
+
     else:
-        pokemon: Pokemon = get_pokemon_from_api(name)
-        POKEMONS[name] = pokemon
+        response = _invalid_request()
 
-    return pokemon
-
-
-def _del_pokemon(name):
-    """Delete pokemon from the cache"""
-
-    return POKEMONS.pop(name)
-
-
-def get_pokemon(request, name: str):
-    if request.method == "GET":
-        pokemon: Pokemon = _get_pokemon(name)
-
-        return HttpResponse(
-            content_type="application/json",
-            content=json.dumps(asdict(pokemon)),
-        )
-
-    elif request.method == "DELETE":
-        if name in POKEMONS:
-            pokemon: Pokemon = _del_pokemon(name)
-        else:
-            return HttpResponseNotFound("Object not found")
-
-
-def get_pokemon_for_mobile(request, name: str):
-    if request.method == "GET":
-        pokemon: Pokemon = _get_pokemon(name)
-
-        result = filter_by_keys(
-            asdict(pokemon),
-            ["id", "name", "base_experience"],
-        )
-        return HttpResponse(
-            content_type="application/json",
-            content=json.dumps(result),
-        )
-
-    elif request.method == "DELETE":
-        if name in POKEMONS:
-            pokemon: Pokemon = _del_pokemon(name)
-        else:
-            return HttpResponseNotFound("Object not found")
-
-
-def get_all_pokemons(request) -> dict[str, dict]:
-    if request.method == "GET":
-        all_pokemons = {}
-
-        for key, value in POKEMONS.items():
-            all_pokemons[key] = asdict(value)
-
-        return HttpResponse(
-            content_type="application/json",
-            content=json.dumps(all_pokemons),
-        )
+    return HttpResponse(
+        content_type="application/json",
+        content=json.dumps(response),
+    )
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/pokemons/<str:name>/", get_pokemon),
-    path("api/pokemons/mobile/<str:name>/", get_pokemon_for_mobile),
-    path("api/pokemons/", get_all_pokemons),
+    path("create-user/", user_view),
 ]
