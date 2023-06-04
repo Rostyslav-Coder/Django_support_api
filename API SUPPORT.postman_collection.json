@@ -1,0 +1,612 @@
+{
+	"info": {
+		"_postman_id": "8f546960-307b-4e2a-95c6-1be5954a9af8",
+		"name": "API SUPPORT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25796701"
+	},
+	"item": [
+		{
+			"name": "Get-key",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET User John",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/?username=John",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "John"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET User Paul",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/?username=Paul",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "Paul"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET User Georg",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/?username=Georg",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "Georg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET User Ringo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/?username=Ringo",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "Ringo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Bad Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/?username=No name User",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "No name User"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST User John",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "John",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "john@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "first_name",
+							"value": "John",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Lennon",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1-Beattles",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST User Paul",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "Paul",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "paul@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "first_name",
+							"value": "Paul",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "McCartney",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "2-Beattles",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST User Georg",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "Georg",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "georg@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "first_name",
+							"value": "Georg",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Harrison",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "3-Beattles",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST User Ringo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "Ringo",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "ringo@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "first_name",
+							"value": "Ringo",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Starr",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "4-Beattles",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE User John",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"John\"}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE User Paul",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"Paul\"}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE User Georg",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"Georg\"}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE User Ringo",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"Ringo\"}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE User John (wrong data)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"John\", \"email\": \"John@mail.com\", \"first_name\": \"Jon\", \"last_name\": \"Lenon\"}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE User John (correct data)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"John\", \"email\": \"john@mail.com\", \"first_name\": \"John\", \"last_name\": \"Lennon\"}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/create-user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"create-user",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
