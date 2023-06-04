@@ -18,13 +18,13 @@ Including another URLconf
 
 
 import json
-
 from functools import wraps
+
 from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path
-from core.models import User
 
+from core.models import User
 
 # ****************************************************************************
 # All roles are hardcoded instead of being used the database
@@ -38,6 +38,7 @@ ROLES = {
 
 def error_handling(func):
     """Decorator for error handling"""
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
@@ -45,6 +46,7 @@ def error_handling(func):
         except User.DoesNotExist:  # pylint: disable=E1101
             response_data = {"message": "User not found."}
             return response_data
+
     return wrapper
 
 
@@ -70,7 +72,9 @@ def _create_user(request):
     last_name = request.POST.get("last_name")
     password = request.POST.get("password")
 
-    if User.objects.filter(username=username).exists():  # pylint: disable=E1101
+    if User.objects.filter(
+        username=username, email=email
+    ).exists():  # pylint: disable=E1101
         response_data = {"message": f"User {username} already taken."}
 
         return response_data
@@ -81,7 +85,7 @@ def _create_user(request):
         first_name=first_name,
         last_name=last_name,
         password=password,
-        role=3
+        role=3,
     )
 
     response_data = {"message": f"User {user.username} created successfully."}
@@ -110,7 +114,7 @@ def _update_user(request):
     first_name = data.get("first_name")
     last_name = data.get("last_name")
 
-    user = User.objects.get(username=username)  #pylint: disable=E1101
+    user = User.objects.get(username=username)  # pylint: disable=E1101
     if email:
         user.email = email
     if first_name:

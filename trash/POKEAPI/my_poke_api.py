@@ -6,8 +6,7 @@ from dataclasses import asdict, dataclass
 
 import requests
 from django.conf import settings
-from django.http import HttpResponse
-from django.http import HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import path
 
 
@@ -24,6 +23,7 @@ def filter_by_keys(sourse: dict, keys: list[str]) -> dict:
 @dataclass
 class Pokemon:
     """Class to create Pokemons"""
+
     id: int
     name: str
     height: int

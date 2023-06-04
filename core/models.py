@@ -4,6 +4,7 @@ from django.db import models
 
 class User(models.Model):
     """Class to create Users Table"""
+
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=100)
@@ -13,11 +14,13 @@ class User(models.Model):
 
     class Meta:
         """Class Meta to rename users table"""
+
         db_table = "users"
 
 
 class Request(models.Model):
     """Class to create Request Table"""
+
     title = models.CharField(max_length=100)
     text = models.TextField()
     visibility = models.BooleanField(default=True)
@@ -31,19 +34,24 @@ class Request(models.Model):
 
     class Meta:
         """Class Meta to rename request table"""
+
         db_table = "requests"
 
 
 class Message(models.Model):
     """Class to create Message Table"""
+
     text = models.TextField()
+    # fmt: off
     user = models.ForeignKey(
         User, on_delete=models.RESTRICT, related_name="messages"
     )
+    # fmt: on
     request = models.ForeignKey(
         Request, on_delete=models.RESTRICT, related_name="messages"
     )
 
     class Meta:
         """Class Meta to rename message table"""
+
         db_table = "messages"
