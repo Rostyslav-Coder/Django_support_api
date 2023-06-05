@@ -72,9 +72,9 @@ def _create_user(request):
     last_name = request.POST.get("last_name")
     password = request.POST.get("password")
 
-    if User.objects.filter(
+    if User.objects.filter(  # pylint: disable=E1101
         username=username, email=email
-    ).exists():  # pylint: disable=E1101
+    ).exists():
         response_data = {"message": f"User {username} already taken."}
 
         return response_data
