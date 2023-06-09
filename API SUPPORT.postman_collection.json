@@ -7,606 +7,481 @@
 	},
 	"item": [
 		{
-			"name": "Get-key",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET User John",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/?username=John",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					],
-					"query": [
-						{
-							"key": "username",
-							"value": "John"
+			"name": "GET-Users",
+			"item": [
+				{
+					"name": "GET User John",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"john\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET User Paul",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/?username=Paul",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					],
-					"query": [
-						{
-							"key": "username",
-							"value": "Paul"
+					},
+					"response": []
+				},
+				{
+					"name": "GET User Paul",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"paul\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET User Georg",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/?username=Georg",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					],
-					"query": [
-						{
-							"key": "username",
-							"value": "Georg"
+					},
+					"response": []
+				},
+				{
+					"name": "GET User Georg",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"georg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET User Ringo",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/?username=Ringo",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					],
-					"query": [
-						{
-							"key": "username",
-							"value": "Ringo"
+					},
+					"response": []
+				},
+				{
+					"name": "GET User Ringo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"ringo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET Bad Request",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/?username=No name User",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					],
-					"query": [
-						{
-							"key": "username",
-							"value": "No name User"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Bad Request",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"noName\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
 						}
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "POST User John",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "X-CSRFToken",
-						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "John",
-							"type": "text"
+			"name": "POST-Users",
+			"item": [
+				{
+					"name": "POST User John",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"john\",\r\n    \"email\": \"john@mail.com\",\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Lennon\",\r\n    \"password\": \"1-Beattles\",\r\n    \"role\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "email",
-							"value": "john@mail.com",
-							"type": "text"
-						},
-						{
-							"key": "first_name",
-							"value": "John",
-							"type": "text"
-						},
-						{
-							"key": "last_name",
-							"value": "Lennon",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "1-Beattles",
-							"type": "text"
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POST User Paul",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "X-CSRFToken",
-						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "Paul",
-							"type": "text"
+				{
+					"name": "POST User Paul",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"paul\",\r\n    \"email\": \"paul@mail.com\",\r\n    \"firstName\": \"Paul\",\r\n    \"lastName\": \"McCartney\",\r\n    \"password\": \"2-Beattles\",\r\n    \"role\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "email",
-							"value": "paul@mail.com",
-							"type": "text"
-						},
-						{
-							"key": "first_name",
-							"value": "Paul",
-							"type": "text"
-						},
-						{
-							"key": "last_name",
-							"value": "McCartney",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "2-Beattles",
-							"type": "text"
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POST User Georg",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "X-CSRFToken",
-						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "Georg",
-							"type": "text"
+				{
+					"name": "POST User Georg",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"georg\",\r\n    \"email\": \"georg@mail.com\",\r\n    \"firstName\": \"Georg\",\r\n    \"lastName\": \"Harrison\",\r\n    \"password\": \"3-Beattles\",\r\n    \"role\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "email",
-							"value": "georg@mail.com",
-							"type": "text"
-						},
-						{
-							"key": "first_name",
-							"value": "Georg",
-							"type": "text"
-						},
-						{
-							"key": "last_name",
-							"value": "Harrison",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "3-Beattles",
-							"type": "text"
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POST User Ringo",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "X-CSRFToken",
-						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "Ringo",
-							"type": "text"
+				{
+					"name": "POST User Ringo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"ringo\",\r\n    \"email\": \"ringo@mail.com\",\r\n    \"firstName\": \"Ringo\",\r\n    \"lastName\": \"Starr\",\r\n    \"password\": \"4-Beattles\",\r\n    \"role\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "email",
-							"value": "ringo@mail.com",
-							"type": "text"
-						},
-						{
-							"key": "first_name",
-							"value": "Ringo",
-							"type": "text"
-						},
-						{
-							"key": "last_name",
-							"value": "Starr",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "4-Beattles",
-							"type": "text"
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
 						}
-					]
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "DELETE User John",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "X-CSRFToken",
-						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"username\": \"John\"}"
+			"name": "DELETE-Users",
+			"item": [
+				{
+					"name": "DELETE User John",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"john\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					]
+				{
+					"name": "DELETE User Paul",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"paul\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE User Georg",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"georg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE User Ringo",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"ringo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "DELETE User Paul",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "X-CSRFToken",
-						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"username\": \"Paul\"}"
+			"name": "PUT-Users",
+			"item": [
+				{
+					"name": "UPDATE User John (wrong data)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"john\",\r\n    \"email\": \"John@mail.com\",\r\n    \"firstName\": \"Jon\",\r\n    \"lastName\": \"Lenon\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					]
+				{
+					"name": "UPDATE User John (correct data)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"john\",\r\n    \"email\": \"john@mail.com\",\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Lennon\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "DELETE User Georg",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "X-CSRFToken",
-						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"username\": \"Georg\"}"
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DELETE User Ringo",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "X-CSRFToken",
-						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"username\": \"Ringo\"}"
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "UPDATE User John (wrong data)",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "X-CSRFToken",
-						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"username\": \"John\", \"email\": \"John@mail.com\", \"first_name\": \"Jon\", \"last_name\": \"Lenon\"}"
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "UPDATE User John (correct data)",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "X-CSRFToken",
-						"value": "mqkZM9RJlSffamMWdmFEhuVkvs99UwlU",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"username\": \"John\", \"email\": \"john@mail.com\", \"first_name\": \"John\", \"last_name\": \"Lennon\"}"
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/create-user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"create-user",
-						""
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }
