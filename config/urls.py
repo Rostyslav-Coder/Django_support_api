@@ -1,29 +1,15 @@
-"""
-URL configuration for config project.
+"""URL configuration for config project."""
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-
-
+import hashlib
 import json
+import re
 from functools import wraps
 
 from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path
 
+from core.constants import Role
 from core.models import User
 
 # ****************************************************************************
@@ -36,21 +22,30 @@ ROLES = {
 }
 
 
-def error_handling(func):
+def error_handler(func):
     """Decorator for error handling"""
 
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
-        except User.DoesNotExist:  # pylint: disable=E1101
-            response_data = {"message": "User not found."}
-            return response_data
+        except ValueError as error:
+            message = {"error": str(error)}
+            status_code = 400
+        except Exception as error:
+            message = {"error": str(error)}
+            status_code = 500
+
+        return HttpResponse(
+            content_type="application/json",
+            content=json.dumps(message),
+            status=status_code,
+        )
 
     return wrapper
 
 
-@error_handling
+@error_handler
 def _get_user(request):
     username = request.GET.get("username")
 
@@ -65,27 +60,39 @@ def _get_user(request):
     return response_data
 
 
+def _validate_email(email: str) -> None:
+    pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    if not re.match(pattern, email):
+        raise ValueError("Email is not correct.")
+
+
+def _hash_password(payload: str) -> str:
+    return hashlib.md5(payload.encode()).hexdigest()
+
+
+@error_handler
 def _create_user(request):
-    username = request.POST.get("username")
-    email = request.POST.get("email")
-    first_name = request.POST.get("first_name")
-    last_name = request.POST.get("last_name")
-    password = request.POST.get("password")
+    data = json.loads(request.body)
+
+    _validate_email(data["email"])
 
     if User.objects.filter(  # pylint: disable=E1101
-        username=username, email=email
+        username=data["username"], email=data["email"]
     ).exists():
-        response_data = {"message": f"User {username} already taken."}
+        response_data = {"message": f"User {data['username']} already taken."}
 
         return response_data
 
+    data["password"] = _hash_password(data["password"])
+    data["role"] = Role.USER
+
     user = User.objects.create(  # pylint: disable=E1101
-        username=username,
-        email=email,
-        first_name=first_name,
-        last_name=last_name,
-        password=password,
-        role=3,
+        username=data["userName"],
+        email=data["email"],
+        first_name=data["firstName"],
+        last_name=data["lastName"],
+        password=data["password"],
+        role=data["role"],
     )
 
     response_data = {"message": f"User {user.username} created successfully."}
@@ -93,7 +100,7 @@ def _create_user(request):
     return response_data
 
 
-@error_handling
+@error_handler
 def _delete_user(request):
     """This funktion delete users from DB"""
     data = json.loads(request.body)
@@ -106,7 +113,7 @@ def _delete_user(request):
     return response_data
 
 
-@error_handling
+@error_handler
 def _update_user(request):
     data = json.loads(request.body)
     username = data.get("username")
@@ -136,16 +143,16 @@ def _invalid_request():
 def user_view(request):
     """This function returns, creates and deletes users."""
 
-    if request.method == "GET":
+    if request.method.upper() == "GET":
         response = _get_user(request)
 
-    elif request.method == "POST":
+    elif request.method.upper() == "POST":
         response = _create_user(request)
 
-    elif request.method == "DELETE":
+    elif request.method.upper() == "DELETE":
         response = _delete_user(request)
 
-    elif request.method == "PUT":
+    elif request.method.upper() == "PUT":
         response = _update_user(request)
 
     else:
@@ -159,5 +166,5 @@ def user_view(request):
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("create-user/", user_view),
+    path("users/", user_view),
 ]
