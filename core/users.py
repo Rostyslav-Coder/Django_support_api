@@ -29,5 +29,5 @@ def create_user(request):
     }
 
     return HttpResponse(
-        content_type="application/json", contrnt=json.dumps(result)
+        content_type="application/json", content=json.dumps(result)
     )
