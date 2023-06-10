@@ -3,9 +3,9 @@
 from django.contrib import admin
 from django.urls import path
 
-from core.api import user_view
+from core.api import create_user
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("users/", user_view),
+    path("users/", create_user),
 ]
