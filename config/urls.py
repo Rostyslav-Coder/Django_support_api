@@ -3,7 +3,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from core.users import create_user
+from core.api import create_user
 
 urlpatterns = [
     path("admin/", admin.site.urls),
