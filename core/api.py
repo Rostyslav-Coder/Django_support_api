@@ -2,10 +2,11 @@
 
 import json
 
-from django.http import HttpResponse
+from django.http import JsonResponse
 
 from core.decorators import base_error_handler
 from core.models import User
+from core.serializers import UserCreateSerializer, UserPublicSerializer
 
 
 @base_error_handler
@@ -13,21 +14,12 @@ def create_user(request):
     if request.method != "POST":
         raise ValueError("Only POST method is allowed")
 
-    # Serialize data into the internal structure
-    data: dict = json.loads(request.body)
-
-    # Save user to the database table
-    user = User.objects.create_user(**data)
-
-    # Create response representation
-    result = {
-        "id": user.pk,
-        "email": user.email,
-        "firstName": user.first_name,
-        "lastName": user.last_name,
-        "role": user.role,
-    }
-
-    return HttpResponse(
-        content_type="application/json", content=json.dumps(result)
+    user_create_serializer = UserCreateSerializer(
+        data=json.loads(request.body)
     )
+    user_create_serializer.is_valid(raise_exception=True)
+    user = User.objects.create_user(**user_create_serializer.validated_data)
+
+    user_public_serializer = UserPublicSerializer(user)
+
+    return JsonResponse(user_public_serializer.data)
