@@ -6,16 +6,33 @@ from rest_framework import serializers
 User = get_user_model()
 
 
-class UserCreateSerializer(serializers.Serializer):
-    """User seriflizer private class"""
+class UserCreateRequestSerializer(serializers.Serializer):
+    """User request serializer class"""
+
+    email = serializers.EmailField()
+    password = serializers.CharField()
+    first_name = serializers.CharField(required=False)
+    last_name = serializers.CharField(required=False)
+
+
+class UserCreateResponseSerializer(serializers.ModelSerializer):
+    """User response serializer class"""
+
+    class Meta:
+        model = User
+        fields = ["id", "email", "first_name", "last_name"]
+
+
+class LoginRequestSerializer(serializers.Serializer):
+    """Request Serializer to Login"""
 
     email = serializers.EmailField()
     password = serializers.CharField()
 
 
-class UserPublicSerializer(serializers.ModelSerializer):
-    """User seriflizer public class"""
+class LoginResponseSerializer(serializers.ModelSerializer):
+    token = serializers.CharField()
 
     class Meta:
         model = User
-        fields = ["id", "email", "first_name", "last_name"]
+        fields = ["id", "email", "first_name", "last_name", "token"]

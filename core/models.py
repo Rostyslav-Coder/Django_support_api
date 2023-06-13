@@ -61,11 +61,9 @@ class Message(models.Model):
     """Class to create Message Table"""
 
     text = models.TextField()
-    # fmt: off
     user = models.ForeignKey(
         User, on_delete=models.RESTRICT, related_name="messages"
     )
-    # fmt: on
     request = models.ForeignKey(
         Request, on_delete=models.RESTRICT, related_name="messages"
     )

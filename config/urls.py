@@ -3,9 +3,10 @@
 from django.contrib import admin
 from django.urls import path
 
-from core.api import create_user
+from core.api import create_user, login_user
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("users/", create_user),
+    path("login/", login_user),
 ]
