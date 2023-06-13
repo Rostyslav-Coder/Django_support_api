@@ -7,7 +7,8 @@ from django.http import JsonResponse
 
 from core.decorators import base_error_handler
 from core.models import User
-from core.serializers import (
+
+from core.serializers import (  # isort:skip
     LoginRequestSerializer,
     LoginResponseSerializer,
     UserCreateRequestSerializer,
