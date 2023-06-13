@@ -4,8 +4,6 @@ import json
 
 from django.contrib.auth import authenticate
 from django.http import JsonResponse
-from rest_framework.authtoken.models import Token
-from rest_framework.exceptions import AuthenticationFailed
 
 from core.decorators import base_error_handler
 from core.models import User
@@ -22,6 +20,7 @@ def create_user(request):
     if request.method != "POST":
         raise ValueError("Only POST method is allowed")
 
+    print(request.body)
     user_create_serializer = UserCreateRequestSerializer(
         data=json.loads(request.body)
     )
@@ -33,29 +32,25 @@ def create_user(request):
     return JsonResponse(user_public_serializer.data)
 
 
-@base_error_handler
+# @base_error_handler
 def login_user(request):
     if request.method != "POST":
         raise ValueError("Only POST method is allowed")
 
+    print(request.body)
     user_login_serializer = LoginRequestSerializer(
         data=json.loads(request.body)
     )
+
     user_login_serializer.is_valid(raise_exception=True)
 
-    email = user_login_serializer["email"]
-    password = user_login_serializer["password"]
+    email = user_login_serializer.validated_data["email"]
+    password = user_login_serializer.validated_data["password"]
 
     user = authenticate(email=email, password=password)
 
     if user is not None:
-        token, _ = Token.objects.get_or_create(  # pylint: disable=E1101
-            user=user
-        )
-        response_serializer = LoginResponseSerializer(
-            user, data={"token": token.key}
-        )
-        response_serializer.is_valid(raise_exception=True)
+        response_serializer = LoginResponseSerializer(user)
         return JsonResponse(response_serializer.data)
 
-    raise AuthenticationFailed("Invalid Email or Password")
+    raise Exception("Invalid Email or Password")

@@ -31,8 +31,6 @@ class LoginRequestSerializer(serializers.Serializer):
 
 
 class LoginResponseSerializer(serializers.ModelSerializer):
-    token = serializers.CharField()
-
     class Meta:
         model = User
-        fields = ["id", "email", "first_name", "last_name", "token"]
+        fields = ["id", "email", "first_name", "last_name"]

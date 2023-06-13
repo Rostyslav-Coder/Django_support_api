@@ -1,4 +1,5 @@
 """This is module to create Data Base Table with fields."""
+
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 
