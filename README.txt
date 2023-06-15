@@ -1,13 +1,11 @@
-PokeAPI перемещён из файла urls.py в файл trash/POKEAPI/my_pokeapi.py. 
-Создал в проекте модели: Users, Request и Messages, как на уроке. 
-Функция create_random_user() с урока считаю “слишком рандомной” для 
-полноценного исследования моделей Django. Создал свою функцию user_view, 
-включающую методы запросов: GET, POST, DELETE & PUT. 
-Поле role захардкодил на 3 (user), т.к. считаю, что права менеджера 
-или админа надо включать через админ-пенель. 
-В результате исследования модели Users обнаружил, что полей 
-с уникальными значениями мы на уроке не создали. Добавил проверку 
-уникальности в код (по username & email), т.к. клонов User_John с 
-новым id уже складывать негде. 
-И переделал модель Users (username & email unique=True).
-Свои запросы Postman экспортировал в JSON и добавил в каталог проекта.
+Созданы следующие сериализаторы:
+- UserCreateRequestSerializer
+- UserCreateResponseSerializer
+- LoginRequestSerializer
+- LoginResponseSerializer
+Сериализаторы UserCreateRequestSerializer и UserCreateResponseSerializer 
+реализованы как на уроке.
+Сериализаторы LoginRequestSerializer и LoginResponseSerializer просто получают 
+какие-то данные, что-то с ними делают, что-то с чем-то сравнивают, и возвращают 
+какой-то результат т.к. в задание входит не реализовывать авторизацию.
+Коллекция запросов для Postman добавлена в директорию проекта.
