@@ -13,6 +13,9 @@ flake8 = "*"
 black = "*"
 requests = "*"
 pylint-django = "*"
+mypy = "*"
+django-stubs = "*"
+djangorestframework-stubs = "*"
 
 [requires]
 python_version = "3.11"
