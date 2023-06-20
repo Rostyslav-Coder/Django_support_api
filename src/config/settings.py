@@ -3,7 +3,8 @@
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+SRC_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = SRC_DIR.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-umuv1b$uyqjl=_2+1pf$vp4mnwaj*hcw%r@!xfcrjjx=d*7z_k"  # noqa: E501
@@ -14,17 +15,27 @@ ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
-INSTALLED_APPS = [
+DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # My additions
-    "core",
-    "rest_framework",
 ]
+
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "rest_framework_simplejwt",
+]
+
+LOCAL_APPS = [
+    "authentication.apps.AuthenticationConfig",
+    "tickets.apps.TicketsConfig",
+    "users.apps.UsersConfig",
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -60,7 +71,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": ROOT_DIR / "db.sqlite3",
     }
 }
 
@@ -99,4 +110,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 POKEAPI_BASE_URL = "https://pokeapi.co/api/v2/pokemon"
 
 
-AUTH_USER_MODEL = "core.User"
+AUTH_USER_MODEL = "users.User"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ],
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}

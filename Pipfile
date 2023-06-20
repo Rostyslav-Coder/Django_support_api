@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 django = "~=4.2"
 djangorestframework = "~=3.14"
+djangorestframework-simplejwt = "~=5.2"
 
 [dev-packages]
 isort = "*"
@@ -13,6 +14,9 @@ flake8 = "*"
 black = "*"
 requests = "*"
 pylint-django = "*"
+mypy = "*"
+django-stubs = "*"
+djangorestframework-stubs = "*"
 
 [requires]
 python_version = "3.11"

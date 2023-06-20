@@ -1,11 +1,14 @@
-Созданы следующие сериализаторы:
-- UserCreateRequestSerializer
-- UserCreateResponseSerializer
-- LoginRequestSerializer
-- LoginResponseSerializer
-Сериализаторы UserCreateRequestSerializer и UserCreateResponseSerializer 
-реализованы как на уроке.
-Сериализаторы LoginRequestSerializer и LoginResponseSerializer просто получают 
-какие-то данные, что-то с ними делают, что-то с чем-то сравнивают, и возвращают 
-какой-то результат т.к. в задание входит не реализовывать авторизацию.
-Коллекция запросов для Postman добавлена в директорию проекта.
+Completed work:
++ The function-based view is changed to the class-based view (UserCreateAPIView)
+where the user registration (creation) is used.
+
++ The UserCreateSerializer is created in order to be used with
+the UserCreateAPIView.
+
++ The UserCreateSerializer takes only email and password as fields
+for creating the user.
+
++ The UserCreateSerializer excludes the password from the response.
+
++ The simplejwt library is used by /auth/token/ API endpoint for obtaining
+the access JWT token.

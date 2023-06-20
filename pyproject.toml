@@ -1,2 +1,76 @@
 [tool.black]
+target-version = ['py311']
 line-length = 79
+exclude = '''
+
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+                     # the root of the project
+)
+'''
+
+[tool.isort]
+py_version=311
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 79
+skip = '.venv,venv,env,migrations'
+src_paths = ["src"]
+
+
+[tool.pytest.ini_options]
+addopts = '-s -v --cache-clear'
+asyncio_mode = 'auto'
+cache_dir = '/tmp'
+python_files = 'tests.py test_*.py *_test.py'
+python_functions = 'test_* *_test'
+filterwarnings = ['ignore::RuntimeWarning', 'ignore::UserWarning']
+env = [
+    "DATABASE__POSTGRES_HOST=localhost",
+    "DATABASE__POSTGRES_PORT=5432",
+    "DATABASE__POSTGRES_PASSWORD=test",
+    "DATABASE__POSTGRES_USER=test",
+    "DATABASE__POSTGRES_DB=test",
+]
+
+[tool.coverage.run]
+omit = [
+    "*/conftest.py",
+    "*/test_*.py",
+    "*/migrations/", ]
+
+[tool.mypy]
+plugins = [
+    "pydantic.mypy"
+]
+python_version = '3.11'
+mypy_path = 'src'
+files = ['*.py',]
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+namespace_packages = true
+
+# Silint "type import errors" as our 3rd-party libs does not have types
+# Check: https://mypy.readthedocs.io/en/latest/config_file.html#import-discovery
+follow_imports = 'silent'
+
+[[tool.mypy.overrides]]
+module = [
+    'mixer.*',
+]
+ignore_missing_imports = true
