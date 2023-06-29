@@ -1,4 +1,4 @@
-"""This is authentication module"""
+"""This is module for configuration app in Authentication component"""
 
 from django.apps import AppConfig
 
