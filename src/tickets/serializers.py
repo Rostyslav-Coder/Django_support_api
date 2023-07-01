@@ -2,7 +2,7 @@
 
 from rest_framework import serializers
 
-from tickets.models import Ticket
+from tickets.models import Message, Ticket
 
 
 class TicketSerializer(serializers.ModelSerializer):
@@ -30,3 +30,12 @@ class TicketAssignSerializer(serializers.Serializer):
         ticket.save()
 
         return ticket
+
+
+class MessageSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Message
+        fields = ["id", "text", "user", "ticket", "timestamp"]
+        read_only_fields = ["id", "timestamp"]
