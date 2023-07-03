@@ -1,7 +1,8 @@
 """This is Admin module."""
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from tickets.models import Ticket, Message
+
+from tickets.models import Message, Ticket
 
 User = get_user_model()
 
@@ -28,11 +29,12 @@ class TicketAdmin(admin.ModelAdmin):
     """Class to create Tickets Admin Inerface"""
 
     list_display = ["title", "user", "manager", "status", "visibility"]
-    search_fields = ["user" ,"manager", "status"]
+    search_fields = ["user", "manager", "status"]
 
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
     """Class to create Messages Admin Inerface"""
+
     list_display = ["user", "ticket", "timestamp"]
     search_fields = ["user", "ticket", "timestamp"]
