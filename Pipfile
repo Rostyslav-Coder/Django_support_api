@@ -7,6 +7,7 @@ name = "pypi"
 django = "~=4.2"
 djangorestframework = "~=3.14"
 djangorestframework-simplejwt = "~=5.2"
+gunicorn = "~= 20.1"
 
 [dev-packages]
 mypy = "*"
