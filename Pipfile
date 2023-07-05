@@ -9,14 +9,15 @@ djangorestframework = "~=3.14"
 djangorestframework-simplejwt = "~=5.2"
 
 [dev-packages]
+mypy = "*"
 isort = "*"
-flake8 = "*"
 black = "*"
+flake8 = "*"
 requests = "*"
 pylint-django = "*"
-mypy = "*"
 django-stubs = "*"
 djangorestframework-stubs = "*"
+drf-yasg = "*"
 
 [requires]
 python_version = "3.11"
