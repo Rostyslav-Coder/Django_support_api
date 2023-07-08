@@ -1,6 +1,7 @@
 """This is module for configuration API in Tickets component."""
 
 from time import sleep
+
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
@@ -12,6 +13,7 @@ from rest_framework.response import Response
 from rest_framework.serializers import ValidationError
 from rest_framework.viewsets import ModelViewSet
 
+from config.celery import celery_app
 from tickets.models import Message, Ticket
 from tickets.permissions import (
     IsManager,
@@ -26,7 +28,6 @@ from tickets.serializers import (
     TicketSerializer,
 )
 from users.constants import Role
-from config.celery import celery_app
 
 User = get_user_model()
 
