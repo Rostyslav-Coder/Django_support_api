@@ -1,5 +1,7 @@
 """This is module for configuration API in Tickets component."""
 
+from time import sleep
+
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
@@ -11,6 +13,7 @@ from rest_framework.response import Response
 from rest_framework.serializers import ValidationError
 from rest_framework.viewsets import ModelViewSet
 
+from config.celery import celery_app
 from tickets.models import Message, Ticket
 from tickets.permissions import (
     IsManager,
@@ -29,6 +32,13 @@ from users.constants import Role
 User = get_user_model()
 
 
+@celery_app.task
+def send_email():
+    print(">>> Sending Email")
+    sleep(3)
+    print(">>> Email sent")
+
+
 class TicketAPIViewSet(ModelViewSet):
     """Class that defines user permissions."""
 
@@ -41,6 +51,8 @@ class TicketAPIViewSet(ModelViewSet):
         """
         user = self.request.user
         all_tickets = Ticket.objects.all()  # pylint: disable=E1101
+
+        send_email.delay()
 
         if user.role == Role.ADMIN:  # type: ignore
             return all_tickets
