@@ -9,6 +9,6 @@ RUN apt-get update \
     && pip install pipenv \
     && pip install watchdog
 
-RUN pipenv sync --dev --system
+RUN pipenv sync
 
 CMD python src/manage.py runserver 0.0.0.0:8000
