@@ -1,19 +1,19 @@
 """Django settings for config project."""
 
 from datetime import timedelta
+from distutils.util import strtobool
+from os import getenv
 from pathlib import Path
-
-from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 SRC_DIR = Path(__file__).resolve().parent.parent
 ROOT_DIR = SRC_DIR.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-umuv1b$uyqjl=_2+1pf$vp4mnwaj*hcw%r@!xfcrjjx=d*7z_k"  # noqa: E501
+SECRET_KEY = getenv("DJANGO_SECRET_KEY", default="invalid")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = strtobool(getenv("DJANGO_DEBUG", default="false"))
 ALLOWED_HOSTS = ["*"]
 
 
@@ -111,7 +111,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-POKEAPI_BASE_URL = "https://pokeapi.co/api/v2/pokemon"
+POKEAPI_BASE_URL = getenv("POKEAPI_BASE_URL", default="invalid")
 
 
 AUTH_USER_MODEL = "users.User"
@@ -138,37 +138,15 @@ if DEBUG is True:
     )
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-    "ROTATE_REFRESH_TOKENS": False,
-    "BLACKLIST_AFTER_ROTATION": False,
-    "UPDATE_LAST_LOGIN": False,
-    "ALGORITHM": "HS256",
-    "SIGNING_KEY": settings.SECRET_KEY,
-    "VERIFYING_KEY": "",
-    "AUDIENCE": None,
-    "ISSUER": None,
-    "JSON_ENCODER": None,
-    "JWK_URL": None,
-    "LEEWAY": 0,
-    "AUTH_HEADER_TYPES": ("Bearer",),
-    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
-    "USER_ID_FIELD": "id",
-    "USER_ID_CLAIM": "user_id",
-    "USER_AUTHENTICATION_RULE": "rest_framework_simplejwt.authentication.default_user_authentication_rule",  # noqa: E501
-    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
-    "TOKEN_TYPE_CLAIM": "token_type",
-    "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
-    "JTI_CLAIM": "jti",
-    "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
-    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
-    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
-    "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",  # noqa: E501
-    "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",  # noqa: E501
-    "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",  # noqa: E501
-    "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",  # noqa: E501
-    "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",  # noqa: E501
-    "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",  # noqa: E501
+    "ACCESS_TOKEN_LIFETIME": timedelta(
+        seconds=int(getenv("JWT_ACCESS_TOKEN_LIFETIME", default=260))
+    ),
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        seconds=int(getenv("JWT_REFRESH_TOKEN_LIFETIME", default=43200))
+    ),
+    "AUTH_HEADER_TYPES": (getenv("JWT_AUTH_HEADER_TYPES", default="Bearer "),),
 }
 
-CELERY_BROKER_URL = "redis://broker:6379/0"
+CELERY_BROKER_URL = getenv(
+    "CELERY_BROKER_URL", default="redis://broker:6379/0"
+)
